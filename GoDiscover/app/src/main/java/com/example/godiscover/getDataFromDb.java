@@ -4,11 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.format.Formatter;
+import android.text.TextUtils;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,60 +23,53 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 public class getDataFromDb extends AppCompatActivity {
 
-    String url = "http://192.168.0.164/AplicatieLicenta/index.php";
-    String newStr = null;
-    ListView listView;
-    TextView title, describeLocation, links;
+    ArrayList<String> newStr = new ArrayList<>();
+    String[] imageLinks = new String[newStr.size()];
+    String url = "http://192.168.0.178/AplicatieLicenta/index.php";
+    String linkStr = "http://192.168.0.178/AplicatieLicenta/imagini/tampa.jpg";
+    //ListView listView;
+    TextView title, describeLocation;
     ImageView ivShowImage;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_data_from_db);
 
-        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
-        String ipAddress = Formatter.formatIpAddress(wifiManager.getConnectionInfo().getIpAddress());
-
         title = (TextView) findViewById(R.id.titleView);
         describeLocation = (TextView) findViewById(R.id.describeView);
-        //ivShowImage = (ImageView) findViewById(R.id.ivShowImage);
-        //links = (TextView) findViewById(R.id.linkImages);
+        ivShowImage = (ImageView) findViewById(R.id.ivShowImage);
         //listView = (ListView) findViewById(R.id.lView);
 
         downloadJSON(url);
+        downloadImagesLink(url);
 
-        //Toast.makeText(getApplicationContext(), ip , Toast.LENGTH_SHORT).show();
 
-        //downloadImagesLink(url);
-
-        //String link = "http://192.168.40.239/AplicatieLicenta/imagini/tampa.jpg";
-
-//        imageDownloader imgDownloader = new imageDownloader();
-//        try {
-//            Bitmap image = imgDownloader.execute(link).get();
-//            ivShowImage.setImageBitmap(image);
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        imageDownloader imgDownloader = new imageDownloader();
+        try {
+            Bitmap image = imgDownloader.execute(linkStr).get();
+            ivShowImage.setImageBitmap(image);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
-    private void downloadJSON(final String urlWebService)
-    {
+    private void downloadJSON(final String urlWebService) {
 
-        class DownloadJSON extends AsyncTask<Void, Void, String>
-        {
+        class DownloadJSON extends AsyncTask<Void, Void, String> {
 
             @Override
             protected void onPreExecute() {
@@ -86,8 +78,7 @@ public class getDataFromDb extends AppCompatActivity {
 
 
             @Override
-            protected void onPostExecute(String s)
-            {
+            protected void onPostExecute(String s) {
                 super.onPostExecute(s);
 
                 try {
@@ -98,16 +89,14 @@ public class getDataFromDb extends AppCompatActivity {
             }
 
             @Override
-            protected String doInBackground(Void... voids)
-            {
+            protected String doInBackground(Void... voids) {
                 try {
                     URL url = new URL(urlWebService);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     StringBuilder sb = new StringBuilder();
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                     String json;
-                    while ((json = bufferedReader.readLine()) != null)
-                    {
+                    while ((json = bufferedReader.readLine()) != null) {
                         sb.append(json + "\n");
                     }
                     return sb.toString().trim();
@@ -120,19 +109,16 @@ public class getDataFromDb extends AppCompatActivity {
         getJSON.execute();
     }
 
-    private void loadIntoListView(String json) throws JSONException
-    {
+    private void loadIntoListView(String json) throws JSONException {
         JSONArray jsonArray = new JSONArray(json);
-        for (int i = 0; i < jsonArray.length(); i++)
-        {
+        for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
             title.setText(obj.getString("titlename"));
             describeLocation.setText(obj.getString("describelocation"));
         }
     }
 
-    private void downloadImagesLink(final String imagesLink)
-    {
+    private void downloadImagesLink(final String imagesLink) {
         class DownloadImagesLink extends AsyncTask<Void, Void, String> {
 
             /*@Override
@@ -172,14 +158,17 @@ public class getDataFromDb extends AppCompatActivity {
         getJSON.execute();
     }
 
-    private void jsonToString(String str) throws JSONException
-    {
+    private void jsonToString(String str) throws JSONException {
         JSONArray jsArr = new JSONArray(str);
-        for(int i = 0; i < jsArr.length(); i++)
-        {
+
+        for (int i = 1; i < jsArr.length(); i++) {
             JSONObject jsObj = jsArr.getJSONObject(i);
-            newStr = jsObj.optString("imagelink");
+            newStr.add(jsObj.optString("imagelink"));
         }
+
+/*        for (int j = 0; j < newStr.size(); j++) {
+            imageLinks[j] = newStr.get(j);
+        }*/
 //        for(int i = 0; i < jsArr.length(); i++)
 //            imageView.setText(imageView.getText() + newStr.get(i) + ", ");
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, newStr);
@@ -189,54 +178,40 @@ public class getDataFromDb extends AppCompatActivity {
 //        }
     }
 
-    class imageDownloader extends AsyncTask<String,Void,Bitmap>
-    {
+    class imageDownloader extends AsyncTask<String,Void,Bitmap> {
         HttpURLConnection httpURLConnection;
 
         @Override
-        protected Bitmap doInBackground(String[] strings)
-        {
+        protected Bitmap doInBackground(String[] strings) {
             try {
-                //for(int i = 0; i < strings.length; i++) {
                     URL url = new URL(strings[0]);
                     httpURLConnection = (HttpURLConnection) url.openConnection();
                     InputStream inputStream = new BufferedInputStream(httpURLConnection.getInputStream());
                     Bitmap temp = BitmapFactory.decodeStream(inputStream);
                     return temp;
-                //}
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            }finally{
+            } finally {
                 httpURLConnection.disconnect();
             }
             return null;
         }
 
         @Override
-        protected void onPostExecute(Bitmap bitmap)
-        {
-            if(bitmap != null)
-            {
+        protected void onPostExecute(Bitmap bitmap) {
+            if (bitmap != null) {
                 ivShowImage.setImageBitmap(bitmap);
                 Toast.makeText(getApplicationContext(), "download succesfull", Toast.LENGTH_SHORT).show();
-                //for(int i = 0; i < newStr.length; i++)
-                  //  links.setText(newStr[i]);
-                    //listView.set
-            }
-            else
-            {
+            } else {
                 Toast.makeText(getApplicationContext(), "oopsiee", Toast.LENGTH_SHORT).show();
             }
         }
 
         @Override
-        protected void onProgressUpdate(Void...updates)
-        {
+        protected void onProgressUpdate(Void... updates) {
             super.onProgressUpdate(updates);
         }
     }
-
-
 }

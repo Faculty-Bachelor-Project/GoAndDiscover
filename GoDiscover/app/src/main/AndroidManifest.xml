@@ -4,17 +4,21 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GoDiscover">
-        <activity android:name=".getDataFromDb"></activity>
+        android:theme="@style/Theme.GoDiscover"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".forgotPassword"></activity>
+        <activity android:name=".signup" />
+        <activity android:name=".login" />
+        <activity android:name=".getDataFromDb" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -23,7 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name=".Capture"
             android:screenOrientation="portrait"

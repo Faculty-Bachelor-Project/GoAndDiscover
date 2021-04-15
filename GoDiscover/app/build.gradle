@@ -37,4 +37,13 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
+    implementation 'com.github.VishnuSivadasVS:Advanced-HttpURLConnection:1.2'
+    implementation 'com.android.volley:volley:1.1.1'
+    // implementation 'com.github.quickbirdstudios:opencv-android:4.3.0'
+    //implementation 'com.github.quickbirdstudios:opencv-android:4.3.0-contrib'
+    // opencv 4.3.0
+//        implementation 'com.quickbirdstudios:opencv:4.3.0'
+//
+//        // opencv 4.3.0 with contribution packages
+//        implementation 'com.quickbirdstudios:opencv:4.3.0-contrib'
 }
