@@ -50,30 +50,37 @@ public class signup extends AppCompatActivity {
 
                         @Override
                         public void run() {
-                            String[] field = new String[3];
-                            field[0] = "user";
-                            field[1] = "email";
-                            field[2] = "pass";
 
-                            String[] data = new String[3];
-                            data[0] = Username;
-                            data[1] = Email;
-                            data[2] = Password;
+                            if(!VerifyPassword.equals(Password))
+                            {
+                                Toast.makeText(getApplicationContext(),"The Password confirmation does not match" , Toast.LENGTH_SHORT).show();
+                            }else {
 
-                            PutData putData = new PutData("http://192.168.0.178/AplicatieLicenta/signup.php", "POST", field, data);
 
-                            if(putData.startPut()) {
-                                if (putData.onComplete()) {
-                                    progressBar.setVisibility(View.GONE);
-                                    String result = putData.getResult();
-                                    if(result.equals("Sign up Success"))
-                                    {
-                                        Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(signup.this, login.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }else
-                                        Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                                String[] field = new String[3];
+                                field[0] = "user";
+                                field[1] = "email";
+                                field[2] = "pass";
+
+                                String[] data = new String[3];
+                                data[0] = Username;
+                                data[1] = Email;
+                                data[2] = Password;
+
+                                PutData putData = new PutData("http://192.168.0.178/AplicatieLicenta/signup.php", "POST", field, data);
+
+                                if (putData.startPut()) {
+                                    if (putData.onComplete()) {
+                                        progressBar.setVisibility(View.GONE);
+                                        String result = putData.getResult();
+                                        if (result.equals("Sign up Success")) {
+                                            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(signup.this, login.class);
+                                            startActivity(intent);
+                                            finish();
+                                        } else
+                                            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
                         }
