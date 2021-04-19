@@ -54,7 +54,7 @@ public class login extends AppCompatActivity {
                             data[0] = Username;
                             data[1] = Password;
 
-                            PutData putData = new PutData("http://192.168.0.178/AplicatieLicenta/login.php", "POST", field, data);
+                            PutData putData = new PutData("http://192.168.0.178/gndApp/login.php", "POST", field, data);
 
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
