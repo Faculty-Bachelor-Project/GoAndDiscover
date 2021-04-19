@@ -20,15 +20,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        if (!OpenCVLoader.initDebug())
-//            Toast.makeText(getApplicationContext(), "its running", Toast.LENGTH_SHORT).show();
-//        else
-//            Toast.makeText(getApplicationContext(), "its running", Toast.LENGTH_SHORT).show();
-
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run(){
-                Intent homeIntent = new Intent(MainActivity.this, login.class);
+                Intent homeIntent = new Intent(MainActivity.this, img_processing.class);
                 startActivity(homeIntent);
                 finish();
             }

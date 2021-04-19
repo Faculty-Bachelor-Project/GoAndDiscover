@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GoDiscover"
         android:usesCleartextTraffic="true">
-        <activity android:name=".forgotPassword"></activity>
+        <activity android:name=".img_processing"></activity>
+        <activity android:name=".forgotPassword" />
         <activity android:name=".signup" />
         <activity android:name=".login" />
         <activity android:name=".getDataFromDb" />
