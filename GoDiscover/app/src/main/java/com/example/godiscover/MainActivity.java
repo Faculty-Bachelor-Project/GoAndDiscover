@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run(){
-                Intent homeIntent = new Intent(MainActivity.this, img_processing.class);
+                Intent homeIntent = new Intent(MainActivity.this, login.class);
                 startActivity(homeIntent);
                 finish();
             }

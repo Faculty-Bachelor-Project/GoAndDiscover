@@ -6,11 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
     tools:context=".getDataFromDb">
+<!--    android:paddingBottom="16dp"-->
+<!--    android:paddingLeft="16dp"-->
+<!--    android:paddingRight="16dp"-->
+<!--    android:paddingTop="16dp"-->
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -59,5 +60,13 @@
                 android:id="@+id/ivShowImage"/>
         </LinearLayout>
     </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="1dp"
+        android:id="@+id/bottom_nav"
+        app:menu="@menu/bottom_navigation_menu" />
 
 </RelativeLayout>

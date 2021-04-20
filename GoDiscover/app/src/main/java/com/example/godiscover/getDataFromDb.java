@@ -1,17 +1,22 @@
 package com.example.godiscover;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,8 +40,8 @@ public class getDataFromDb extends AppCompatActivity {
 
     ArrayList<String> newStr = new ArrayList<>();
     String[] imageLinks = new String[newStr.size()];
-    String url = "http://192.168.0.178/AplicatieLicenta/index.php";
-    String linkStr = "http://192.168.0.178/AplicatieLicenta/imagini/tampa.jpg";
+    String url = "http://192.168.0.178/gndApp/index.php";
+    String linkStr = "http://192.168.0.178/gndApp/imagini/tampa.jpg";
     //ListView listView;
     TextView title, describeLocation;
     ImageView ivShowImage;
@@ -64,6 +69,32 @@ public class getDataFromDb extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.db_data);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId())
+                {
+                    case R.id.db_data:
+                        return true;
+
+                    case R.id.scanner:
+                        startActivity(new Intent(getApplicationContext(),img_processing.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.user:
+                        startActivity(new Intent(getApplicationContext(),user.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
+            }
+        });
+
+
     }
 
 

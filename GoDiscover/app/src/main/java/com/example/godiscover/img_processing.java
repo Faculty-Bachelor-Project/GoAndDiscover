@@ -1,12 +1,18 @@
 package com.example.godiscover;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.MenuItem;
 import android.view.Surface;
 import android.view.SurfaceView;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
@@ -44,6 +50,30 @@ public class img_processing extends AppCompatActivity implements CameraBridgeVie
                 }
             }
         };
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.scanner);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId())
+                {
+                    case R.id.db_data:
+                        startActivity(new Intent(getApplicationContext(),getDataFromDb.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.scanner:
+                        return true;
+
+                    case R.id.user:
+                        startActivity(new Intent(getApplicationContext(),user.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override

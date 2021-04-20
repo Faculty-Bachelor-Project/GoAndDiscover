@@ -15,12 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GoDiscover"
         android:usesCleartextTraffic="true">
-        <activity android:name=".img_processing"></activity>
+        <activity android:name=".user"></activity>
+        <activity android:name=".img_processing" />
         <activity android:name=".forgotPassword" />
         <activity android:name=".signup" />
         <activity android:name=".login" />
         <activity android:name=".getDataFromDb" />
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".changePassword" />
+        <activity android:name=".verifyOtpCode" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

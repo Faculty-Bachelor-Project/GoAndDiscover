@@ -62,7 +62,7 @@ public class login extends AppCompatActivity {
                                     String result = putData.getResult();
                                     if (result.equals("Login Success")) {
                                         Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(login.this, HomeActivity.class);
+                                        Intent intent = new Intent(login.this, img_processing.class);
                                         startActivity(intent);
                                         finish();
                                     } else
