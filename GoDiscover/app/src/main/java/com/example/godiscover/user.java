@@ -23,6 +23,11 @@ public class user extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId())
                 {
+                    case R.id.googleMaps:
+                        startActivity(new Intent(getApplicationContext(),map.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
                     case R.id.db_data:
                         startActivity(new Intent(getApplicationContext(),getDataFromDb.class));
                         overridePendingTransition(0,0);

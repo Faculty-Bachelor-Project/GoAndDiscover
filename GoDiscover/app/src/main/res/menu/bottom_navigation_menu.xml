@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/googleMaps"
+        android:enabled="true"
+        android:icon="@drawable/ic_maps"
+        android:title=""/>
+
+    <item
         android:id="@+id/db_data"
         android:enabled="true"
         android:icon="@drawable/ic_db_data"
