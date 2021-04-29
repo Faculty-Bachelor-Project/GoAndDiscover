@@ -126,6 +126,30 @@ class database
         }
     }
 	
+	function isDerivable($emailAddress)
+	{
+		$api_key = "3170dec1aa1e4422b916a2b09241b87b";
+
+		$ch = curl_init();
+
+		curl_setopt_array($ch, [
+			CURLOPT_URL => "https://emailvalidation.abstractapi.com/v1?api_key=$api_key&email=$emailAddress",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_FOLLOWLOCATION => true
+		]);
+		
+		$response = curl_exec($ch);
+
+		curl_close($ch);
+
+		$data = json_decode($response, true);
+		
+		if($data['deliverability'] === "DELIVERABLE" && $data["is_free_email"]["value"] === true && $data["is_disposable_email"]["value"] === true)
+		{
+		return true;
+		} else return false;
+	}
+	
 	
 }
 
