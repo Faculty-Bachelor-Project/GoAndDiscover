@@ -71,6 +71,11 @@ public class img_processing extends AppCompatActivity implements CameraBridgeVie
                     case R.id.scanner:
                         return true;
 
+                    case R.id.events:
+                        startActivity(new Intent(getApplicationContext(),events.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
                     case R.id.user:
                         startActivity(new Intent(getApplicationContext(),user.class));
                         overridePendingTransition(0,0);

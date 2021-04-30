@@ -38,6 +38,11 @@ public class user extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
 
+                    case R.id.events:
+                        startActivity(new Intent(getApplicationContext(),events.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
                     case R.id.user:
                         return true;
                 }

@@ -77,11 +77,21 @@ public class getDataFromDb extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId())
                 {
+                    case R.id.googleMaps:
+                        startActivity(new Intent(getApplicationContext(),map.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
                     case R.id.db_data:
                         return true;
 
                     case R.id.scanner:
                         startActivity(new Intent(getApplicationContext(),img_processing.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.events:
+                        startActivity(new Intent(getApplicationContext(),events.class));
                         overridePendingTransition(0,0);
                         return true;
 

@@ -51,6 +51,11 @@ public class map extends FragmentActivity implements OnMapReadyCallback {
                         overridePendingTransition(0,0);
                         return true;
 
+                    case R.id.events:
+                        startActivity(new Intent(getApplicationContext(),events.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
                     case R.id.user:
                         startActivity(new Intent(getApplicationContext(),user.class));
                         overridePendingTransition(0,0);
