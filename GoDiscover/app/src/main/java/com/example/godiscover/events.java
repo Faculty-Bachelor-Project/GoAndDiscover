@@ -87,7 +87,7 @@ public class events extends AppCompatActivity {
         public void onPreExecute()
         {
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
             progressBar.startAnimation(AnimationUtils.loadAnimation(events.this,android.R.anim.fade_in));
         }
 
@@ -105,7 +105,7 @@ public class events extends AppCompatActivity {
             try {
                 String url = "https://spectacolebrasov.ro/";
                 Document doc = Jsoup.connect(url).get();
-                Elements data = doc.select("div.img_box");
+                Elements data = doc.select("div.item");
                 int size = data.size();
                 for(int i = 0; i < size; i++)
                 {
@@ -125,8 +125,20 @@ public class events extends AppCompatActivity {
                             .select("a")
                             .eq(i)
                             .text();
-                    eventsParseItems.add(new EventsParseItem(imgUrl,img_width,img_height,title));
-                    Log.d("items", "img: " + imgUrl + " . title: " + title + " . width: " + img_width + " . height: " + img_height);
+                    String location = data.select("div.detail_box")
+                            .select("p.locatie")
+                            .eq(i)
+                            .text();
+                    String text_date = data.select("div.info_left")
+                            .select("span.info_first_row")
+                            .eq(i)
+                            .text();
+                    String url_btn = data.select("h1")
+                            .select("a")
+                            .eq(i)
+                            .attr("href");
+                    eventsParseItems.add(new EventsParseItem(imgUrl,img_width,img_height,title,location,text_date,url_btn));
+                    //Log.d("items", "img: " + imgUrl + " . title: " + title + " . width: " + img_width + " . height: " + img_height + " . location: " + location + ". url_btn: " + url_btn);
                 }
             }catch (IOException e) {
                 e.printStackTrace();

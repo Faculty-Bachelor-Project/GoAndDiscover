@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_marginBottom="50dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        style="@style/CardView.Light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="8dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="#88888888"/>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="240dp"
+        android:textSize="13dp"
+        android:text="Title" />
+
+    <ImageView
+        android:id="@+id/locationImage"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:scaleType="centerCrop"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="26.5dp"
+        android:layout_marginLeft="240dp"
+        app:srcCompat="@drawable/ic_maps"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/location"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:text="Location"
+        android:textSize="13dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="265dp" />
+
+    <ImageView
+        android:id="@+id/img_date"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:scaleType="centerCrop"
+        android:layout_below="@+id/location"
+        android:layout_marginTop="26.5dp"
+        android:layout_marginLeft="240dp"
+        app:srcCompat="@drawable/ic_date"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/text_date"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/location"
+        android:text="Date"
+        android:textSize="13dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="265dp" />
+
+    <Button
+        android:id="@+id/url_btn"
+        android:layout_width="165dp"
+        android:layout_height="40dp"
+        android:textSize="12dp"
+        android:layout_below="@+id/img_date"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="25dp"
+        android:text="Check on Website"
+        app:backgroundTint="@android:color/holo_orange_dark" />
+
+
+</RelativeLayout>
