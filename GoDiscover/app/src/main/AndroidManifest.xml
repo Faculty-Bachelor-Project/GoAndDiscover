@@ -7,8 +7,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -18,11 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GoDiscover"
         android:usesCleartextTraffic="true">
+        <activity android:name=".events"></activity>
 
-        <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="@string/maps_key"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/maps_key" />
 
-        <activity android:name=".map"></activity>
+        <activity android:name=".map" />
         <activity android:name=".user" />
         <activity android:name=".img_processing" />
         <activity android:name=".forgotPassword" />

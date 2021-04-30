@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -29,6 +30,8 @@ public class login extends AppCompatActivity {
 
     String prefs_name = "PrefsFile";
     SharedPreferences MPrefs;
+
+    private long pressedTime;
 
     private void getPreferncesData() {
         SharedPreferences SP = getSharedPreferences(prefs_name, MODE_PRIVATE);
@@ -94,14 +97,14 @@ public class login extends AppCompatActivity {
                             data[0] = Username;
                             data[1] = Password;
 
-                            PutData putData = new PutData("http://192.168.2.113/gndApp/login.php", "POST", field, data);
+                            PutData putData = new PutData("http://192.168.0.178/gndApp/login.php", "POST", field, data);
 
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
                                     progressBar.setVisibility(View.GONE);
                                     String result = putData.getResult();
                                     if (result.equals("Login Success")) {
-                                        Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(login.this, img_processing.class);
                                         startActivity(intent);
                                         username.getText().clear();
@@ -139,5 +142,19 @@ public class login extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (pressedTime + 2000 > System.currentTimeMillis()) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }else {
+            Toast.makeText(getBaseContext(), "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
+        }
+        pressedTime = System.currentTimeMillis();
     }
 }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ public class signup extends AppCompatActivity {
     Button loginButton, registerButton;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,7 @@ public class signup extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progress);
         registerButton = (Button) findViewById(R.id.signupButton);
         loginButton = (Button) findViewById(R.id.loginBtn);
+
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +96,7 @@ public class signup extends AppCompatActivity {
             }
         });
 
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,8 +105,15 @@ public class signup extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
-
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent intent = new Intent(signup.this,
+                    login.class);
+            startActivity(intent);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
