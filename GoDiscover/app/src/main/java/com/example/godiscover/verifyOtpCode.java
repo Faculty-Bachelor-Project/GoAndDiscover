@@ -77,7 +77,7 @@ public class verifyOtpCode extends AppCompatActivity {
                                     String resultForgotPage = putData.getResult();
                                     if (resultForgotPage.equals("Verification success")) {
                                         Toast.makeText(getApplicationContext(), "Verification success", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(verifyOtpCode.this, changePassword.class);
+                                        Intent intent = new Intent(verifyOtpCode.this, resetPassword.class);
                                         intent.putExtra("EXTRA_TEXT", getEmailText);
                                         startActivity(intent);
                                         finish();

@@ -36,6 +36,8 @@ public class img_processing extends AppCompatActivity implements CameraBridgeVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_img_processing);
+        Intent intent = getIntent();
+        String getUser = intent.getStringExtra("extra");
         cameraBridgeViewBase = (JavaCameraView)findViewById(R.id.camera);
         cameraBridgeViewBase.setVisibility(SurfaceView.VISIBLE);
         cameraBridgeViewBase.setCvCameraViewListener(this);
@@ -79,7 +81,9 @@ public class img_processing extends AppCompatActivity implements CameraBridgeVie
                         return true;
 
                     case R.id.user:
-                        startActivity(new Intent(getApplicationContext(),user.class));
+                        Intent intent1 = new Intent(img_processing.this, user_menu.class);
+                        intent1.putExtra("extra",getUser);
+                        startActivity(intent1);
                         overridePendingTransition(0,0);
                         return true;
                 }

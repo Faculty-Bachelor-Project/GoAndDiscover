@@ -41,8 +41,8 @@ public class getDataFromDb extends AppCompatActivity {
 
     ArrayList<String> newStr = new ArrayList<>();
     String[] imageLinks = new String[newStr.size()];
-    String url = "http://192.168.0.178/gndApp/index.php";
-    String linkStr = "http://192.168.0.178/gndApp/imagini/tampa.jpg";
+    String url = "http://192.168.0.108/gndApp/index.php";
+    String linkStr = "http://192.168.0.108/gndApp/imagini/tampa.jpg";
     //ListView listView;
     TextView title, describeLocation;
     ImageView ivShowImage;

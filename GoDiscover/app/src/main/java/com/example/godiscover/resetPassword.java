@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
-public class changePassword extends AppCompatActivity {
+public class resetPassword extends AppCompatActivity {
 
     private EditText newPassword, confirmNewPassword;
     private ProgressBar progressBar;
@@ -72,7 +72,7 @@ public class changePassword extends AppCompatActivity {
                                         String result = putData.getResult();
                                         if (result.equals("Password updated")) {
                                             Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(changePassword.this, login.class);
+                                            Intent intent = new Intent(resetPassword.this, login.class);
                                             startActivity(intent);
                                             finish();
                                         } else
