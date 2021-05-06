@@ -1,9 +1,14 @@
 package com.example.godiscover;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -16,6 +21,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class login extends AppCompatActivity {
@@ -32,6 +40,7 @@ public class login extends AppCompatActivity {
     SharedPreferences MPrefs;
 
     private long pressedTime;
+    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
 
     private void getPreferncesData() {
         SharedPreferences SP = getSharedPreferences(prefs_name, MODE_PRIVATE);
@@ -65,6 +74,9 @@ public class login extends AppCompatActivity {
         MPrefs = getSharedPreferences(prefs_name, MODE_PRIVATE);
         getPreferncesData();
 
+        if(checkAndRequestPermissions()) {
+        }
+
         loginBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,15 +109,15 @@ public class login extends AppCompatActivity {
                             data[0] = Username;
                             data[1] = Password;
 
-                            PutData putData = new PutData("http://192.168.0.178/gndApp/login.php", "POST", field, data);
+                            PutData putData = new PutData("http://192.168.0.108/gndApp/login.php", "POST", field, data);
 
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
                                     progressBar.setVisibility(View.GONE);
                                     String result = putData.getResult();
                                     if (result.equals("Login Success")) {
-                                        //Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(login.this, img_processing.class);
+                                        intent.putExtra("extra",Username);
                                         startActivity(intent);
                                         username.getText().clear();
                                         password.getText().clear();
@@ -156,5 +168,23 @@ public class login extends AppCompatActivity {
             Toast.makeText(getBaseContext(), "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
         }
         pressedTime = System.currentTimeMillis();
+    }
+
+    private  boolean checkAndRequestPermissions() {
+        int permissionSendMessage = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA);
+        int locationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        if (locationPermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (permissionSendMessage != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.CAMERA);
+        }
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),REQUEST_ID_MULTIPLE_PERMISSIONS);
+            return false;
+        }
+        return true;
     }
 }
