@@ -5,25 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
-import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.view.Surface;
 import android.view.SurfaceView;
 import android.widget.Toast;
 
+import com.example.godiscover.locations.getDataFromDb;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
 import org.opencv.android.OpenCVLoader;
-import org.opencv.core.Core;
 import org.opencv.core.Mat;
-import org.opencv.*;
-import org.opencv.imgproc.Imgproc;
-
-import java.util.Random;
 
 public class img_processing extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
@@ -68,7 +61,7 @@ public class img_processing extends AppCompatActivity implements CameraBridgeVie
                         return true;
 
                     case R.id.db_data:
-                        startActivity(new Intent(getApplicationContext(),getDataFromDb.class));
+                        startActivity(new Intent(getApplicationContext(), getDataFromDb.class));
                         overridePendingTransition(0,0);
                         return true;
 
@@ -82,7 +75,7 @@ public class img_processing extends AppCompatActivity implements CameraBridgeVie
 
                     case R.id.user:
                         Intent intent1 = new Intent(img_processing.this, user_menu.class);
-                        intent1.putExtra("extra",getUser);
+                        intent1.putExtra("extraString",getUser);
                         startActivity(intent1);
                         overridePendingTransition(0,0);
                         return true;

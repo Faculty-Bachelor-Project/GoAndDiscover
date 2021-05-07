@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 
+import com.example.godiscover.locations.getDataFromDb;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jsoup.Jsoup;
@@ -59,7 +59,7 @@ public class events extends AppCompatActivity {
                         return true;
 
                     case R.id.db_data:
-                        startActivity(new Intent(getApplicationContext(),getDataFromDb.class));
+                        startActivity(new Intent(getApplicationContext(), getDataFromDb.class));
                         overridePendingTransition(0,0);
                         return true;
 

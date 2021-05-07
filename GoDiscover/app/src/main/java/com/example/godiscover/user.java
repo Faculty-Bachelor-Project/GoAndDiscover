@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 
+import com.example.godiscover.locations.getDataFromDb;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class user extends AppCompatActivity {
@@ -30,7 +31,7 @@ public class user extends AppCompatActivity {
                         return true;
 
                     case R.id.db_data:
-                        startActivity(new Intent(getApplicationContext(),getDataFromDb.class));
+                        startActivity(new Intent(getApplicationContext(), getDataFromDb.class));
                         overridePendingTransition(0,0);
                         return true;
 

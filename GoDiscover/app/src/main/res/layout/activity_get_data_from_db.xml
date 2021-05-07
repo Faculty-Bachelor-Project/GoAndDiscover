@@ -1,72 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".getDataFromDb">
-<!--    android:paddingBottom="16dp"-->
-<!--    android:paddingLeft="16dp"-->
-<!--    android:paddingRight="16dp"-->
-<!--    android:paddingTop="16dp"-->
+    android:fillViewport="true">
 
-
-    <ScrollView
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:stretchColumns="1">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            tools:context=".locations.getDataFromDb">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:orientation="vertical"
+                android:id="@+id/header">
+
+                <ImageView
+                    android:id="@+id/topImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:id="@+id/dbTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="40dp"
+                    android:text="titlu"
+                    android:paddingLeft="20dp"
+                    android:background="#B5292828"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="5"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/white"/>
+            </RelativeLayout>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:id="@+id/titleView"/>
+                android:layout_width="fill_parent"
+                android:id="@+id/dbDescribeLocation"
+                android:layout_height="400dp"
+                android:layout_marginBottom="40dp"
+                android:layout_marginTop="20dp"
+                android:padding="20dp"
+                android:layout_below="@+id/header"
+                android:text="descriere"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dbDataList"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
                 android:layout_marginBottom="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="40dp"
-                android:id="@+id/describeView"/>
+                android:layout_below="@+id/dbDescribeLocation"/>
 
-            <!--            <TextView-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_centerInParent="true"-->
-            <!--                android:layout_marginBottom="20dp"-->
-            <!--                android:layout_marginTop="40dp"-->
-            <!--                android:layout_marginLeft="40dp"-->
-            <!--                android:id="@+id/linkImages"/>-->
 
-            <!--            <ListView-->
-            <!--                android:id="@+id/lView"-->
-            <!--                android:layout_width="368dp"-->
-            <!--                android:layout_height="700dp"-->
-            <!--                tools:layout_editor_absoluteX="20dp"-->
-            <!--                tools:layout_editor_absoluteY="8dp"-->
-            <!--                tools:ignore="MissingConstraints" />-->
-
-            <ImageView
-                android:layout_width="wrap_content"
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ivShowImage"/>
-        </LinearLayout>
-    </ScrollView>
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="1dp"
+                android:id="@+id/bottom_nav"
+                app:menu="@menu/bottom_navigation_menu" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="1dp"
-        android:id="@+id/bottom_nav"
-        app:menu="@menu/bottom_navigation_menu" />
+        </RelativeLayout>
 
-</RelativeLayout>
+    </TableLayout>
+</ScrollView>
+

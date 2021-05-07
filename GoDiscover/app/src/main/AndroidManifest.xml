@@ -34,7 +34,7 @@
         <activity android:name=".forgotPassword" />
         <activity android:name=".signup" />
         <activity android:name=".login" />
-        <activity android:name=".getDataFromDb" />
+        <activity android:name=".locations.getDataFromDb" />
         <activity android:name=".resetPassword" />
         <activity android:name=".verifyOtpCode" />
         <activity android:name=".MainActivity">
