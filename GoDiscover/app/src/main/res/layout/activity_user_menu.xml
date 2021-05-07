@@ -24,26 +24,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/forgotBtn" />
 
+
+
     <TextView
         android:id="@+id/userT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text=""
         android:textColor="#3D6CFC"
         android:textSize="30dp"
-        android:layout_centerHorizontal="true"
-        android:padding="50dp"/>
+        android:layout_marginTop="100dp"/>
 
     <TextView
         android:id="@+id/emailT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text=""
         android:textColor="#3D6CFC"
         android:textSize="30dp"
-        android:layout_centerHorizontal="true"
         android:padding="50dp"
-        android:layout_marginTop="50dp" />
+        android:layout_below="@id/userT"/>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

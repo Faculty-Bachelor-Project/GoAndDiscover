@@ -1,80 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
-
-    <TableLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".locations.getDataFromDb">
+    <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:stretchColumns="1">
+        android:fillViewport="true">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context=".locations.getDataFromDb">
+            android:stretchColumns="1">
 
-            <RelativeLayout
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:orientation="vertical"
-                android:id="@+id/header">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/topImage"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"/>
+                    android:layout_height="250dp"
+                    android:orientation="vertical"
+                    android:id="@+id/header">
+
+                    <ImageView
+                        android:id="@+id/topImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"/>
+
+                    <TextView
+                        android:id="@+id/dbTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="40dp"
+                        android:text="titlu"
+                        android:paddingLeft="20dp"
+                        android:background="#B5292828"
+                        android:shadowColor="@color/black"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="5"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/dbTitle"
+                    android:layout_width="fill_parent"
+                    android:id="@+id/dbDescribeLocation"
+                    android:layout_height="280dp"
+                    android:layout_marginBottom="40dp"
+                    android:layout_marginTop="20dp"
+                    android:padding="20dp"
+                    android:layout_below="@+id/header"
+                    android:text="descriere"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/dbDataList"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="40dp"
-                    android:text="titlu"
-                    android:paddingLeft="20dp"
-                    android:background="#B5292828"
-                    android:shadowColor="@color/black"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
-                    android:shadowRadius="5"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/white"/>
-            </RelativeLayout>
+                    android:layout_height="250dp"
+                    android:layout_marginBottom="100dp"
+                    android:orientation="horizontal"
+                    android:layout_below="@+id/dbDescribeLocation"/>
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:id="@+id/dbDescribeLocation"
-                android:layout_height="400dp"
-                android:layout_marginBottom="40dp"
-                android:layout_marginTop="20dp"
-                android:padding="20dp"
-                android:layout_below="@+id/header"
-                android:text="descriere"/>
+            </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/dbDataList"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginBottom="20dp"
-                android:layout_below="@+id/dbDescribeLocation"/>
+        </TableLayout>
+    </ScrollView>
 
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="1dp"
-                android:id="@+id/bottom_nav"
-                app:menu="@menu/bottom_navigation_menu" />
-
-        </RelativeLayout>
-
-    </TableLayout>
-</ScrollView>
-
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottom_nav"
+        app:menu="@menu/bottom_navigation_menu" />
+</RelativeLayout>

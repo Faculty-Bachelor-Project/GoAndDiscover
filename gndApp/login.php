@@ -8,6 +8,7 @@ require "database.php";
 		if ($db->dbConnect()) {
 			if ($db->logIn("users", $_POST['user'], $_POST['pass'])) {
 				echo "Login Success";
+				exit;
 			} else echo "Username or Password wrong";
 		} else echo "Error: Database connection";
 	} else echo "All fields are required";
