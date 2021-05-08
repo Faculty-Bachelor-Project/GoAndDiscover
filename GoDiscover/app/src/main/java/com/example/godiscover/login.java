@@ -1,6 +1,5 @@
 package com.example.godiscover;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -11,12 +10,11 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.KeyEvent;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
+
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -27,6 +25,8 @@ import java.util.List;
 
 
 public class login extends AppCompatActivity {
+
+    private static String URL = "http://192.168.0.108/gndApp/login.php";
 
     EditText username;
     EditText password;
@@ -109,7 +109,7 @@ public class login extends AppCompatActivity {
                             data[0] = Username;
                             data[1] = Password;
 
-                            PutData putData = new PutData("http://192.168.0.108/gndApp/login.php", "POST", field, data);
+                            PutData putData = new PutData(URL, "POST", field, data);
 
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
@@ -117,7 +117,7 @@ public class login extends AppCompatActivity {
                                     String result = putData.getResult();
                                     if (result.equals("Login Success")) {
                                         Intent intent = new Intent(login.this, img_processing.class);
-                                        intent.putExtra("extra",Username);
+                                        intent.putExtra("extraString",Username);
                                         startActivity(intent);
                                         username.getText().clear();
                                         password.getText().clear();
@@ -171,15 +171,18 @@ public class login extends AppCompatActivity {
     }
 
     private  boolean checkAndRequestPermissions() {
-        int permissionSendMessage = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA);
+        int permissionSendMessage = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         int locationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int storagePermission = ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE);
         List<String> listPermissionsNeeded = new ArrayList<>();
         if (locationPermission != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
         }
         if (permissionSendMessage != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.CAMERA);
+        }
+        if (storagePermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
         if (!listPermissionsNeeded.isEmpty()) {
             ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),REQUEST_ID_MULTIPLE_PERMISSIONS);
