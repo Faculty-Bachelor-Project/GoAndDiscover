@@ -6,22 +6,60 @@
     android:layout_height="match_parent"
     tools:context=".user">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/userImg"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        tools:srcCompat="@tools:sample/avatars"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/avatar"
+        android:layout_below="@+id/toolbar" />
+
+    <Button
+        android:id="@+id/chgImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="30dp"
+        android:text="Change Image"
+        android:layout_below="@+id/userImg"
         android:layout_centerHorizontal="true"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/userT"
+        android:layout_width="274dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chgImg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/emailT"
+        android:layout_width="379dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userT"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-11dp"
+        android:layout_marginBottom="30dp"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="25dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="1dp"
         android:id="@+id/bottom_nav"
-        app:menu="@menu/bottom_navigation_menu" />
-
+        app:menu="@menu/bottom_navigation_menu"/>
 
 
 </RelativeLayout>

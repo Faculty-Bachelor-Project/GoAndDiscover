@@ -18,11 +18,12 @@ public class resetPassword extends AppCompatActivity {
     private EditText newPassword, confirmNewPassword;
     private ProgressBar progressBar;
     private Button verifyButton;
+    private static String URL = "http://192.168.0.178/gndApp/resetPassword.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_password);
+        setContentView(R.layout.activity_reset_password);
 
         Intent intent = getIntent();
         String getEmailText = intent.getStringExtra("EXTRA_TEXT");
@@ -64,7 +65,7 @@ public class resetPassword extends AppCompatActivity {
                                 data[0] = NewPassword;
                                 data[1] = getEmailText;
 
-                                PutData putData = new PutData("http://192.168.0.178/gndApp/resetPassword.php", "POST", field, data);
+                                PutData putData = new PutData(URL, "POST", field, data);
 
                                 if (putData.startPut()) {
                                     if (putData.onComplete()) {

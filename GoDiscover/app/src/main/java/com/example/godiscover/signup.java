@@ -15,8 +15,11 @@ import android.widget.Toast;
 
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
+import java.net.URL;
+
 public class signup extends AppCompatActivity {
 
+    private static String URL = "http://192.168.0.178/gndApp/signup.php";
     EditText username, email, password, verifyPassword;
     ProgressBar progressBar;
     Button loginButton, registerButton;
@@ -70,7 +73,7 @@ public class signup extends AppCompatActivity {
                                 data[1] = Email;
                                 data[2] = Password;
 
-                                PutData putData = new PutData("http://192.168.0.178/gndapp/signup.php", "POST", field, data);
+                                PutData putData = new PutData(URL, "POST", field, data);
 
                                 if (putData.startPut()) {
                                     if (putData.onComplete()) {

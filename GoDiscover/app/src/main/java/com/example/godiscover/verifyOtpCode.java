@@ -21,6 +21,7 @@ public class verifyOtpCode extends AppCompatActivity {
     private EditText input1, input2, input3, input4, input5;
     private ProgressBar progressBar;
     private Button verifyButton;
+    private static String URL = "http://192.168.0.178/gndApp/resetPasswordWithOTP.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class verifyOtpCode extends AppCompatActivity {
                             String[] data = new String[1];
                             data[0] = OTP_Code;
 
-                            PutData putData = new PutData("http://192.168.0.178/gndApp/resetPasswordWithOTP.php", "POST", field, data);
+                            PutData putData = new PutData(URL, "POST", field, data);
 
                             String sessionEmail = getIntent().getStringExtra("EXTRA_SESSION_ID");
 

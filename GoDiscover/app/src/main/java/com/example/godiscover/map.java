@@ -29,6 +29,8 @@ public class map extends FragmentActivity implements OnMapReadyCallback {
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        Intent intent = getIntent();
+        String getUser = intent.getStringExtra("extraString");
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.googleMaps);
@@ -41,22 +43,30 @@ public class map extends FragmentActivity implements OnMapReadyCallback {
                         return true;
 
                     case R.id.db_data:
-                        startActivity(new Intent(getApplicationContext(), getDataFromDb.class));
+                        Intent intent1 = new Intent(map.this, getDataFromDb.class);
+                        intent1.putExtra("extraString",getUser);
+                        startActivity(intent1);
                         overridePendingTransition(0,0);
                         return true;
 
                     case R.id.scanner:
-                        startActivity(new Intent(getApplicationContext(),img_processing.class));
+                        Intent intent2 = new Intent(map.this, img_processing.class);
+                        intent2.putExtra("extraString",getUser);
+                        startActivity(intent2);
                         overridePendingTransition(0,0);
                         return true;
 
                     case R.id.events:
-                        startActivity(new Intent(getApplicationContext(),events.class));
+                        Intent intent3 = new Intent(map.this, events.class);
+                        intent3.putExtra("extraString",getUser);
+                        startActivity(intent3);
                         overridePendingTransition(0,0);
                         return true;
 
                     case R.id.user:
-                        startActivity(new Intent(getApplicationContext(),user.class));
+                        Intent intent4 = new Intent(map.this, user.class);
+                        intent4.putExtra("extraString",getUser);
+                        startActivity(intent4);
                         overridePendingTransition(0,0);
                         return true;
                 }

@@ -2,41 +2,29 @@ package com.example.godiscover.locations;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.godiscover.R;
 import com.example.godiscover.events;
 import com.example.godiscover.img_processing;
-import com.example.godiscover.locations.DatabaseParseAdapter;
-import com.example.godiscover.locations.DatabaseParseItem;
-import com.example.godiscover.login;
 import com.example.godiscover.map;
 import com.example.godiscover.user;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
-import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,6 +49,8 @@ public class getDataFromDb extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_data_from_db);
+        Intent intent = getIntent();
+        String getUser = intent.getStringExtra("extraString");
 
         recyclerView = (RecyclerView) findViewById(R.id.dbDataList);
 
@@ -78,7 +68,9 @@ public class getDataFromDb extends AppCompatActivity {
                 switch (item.getItemId())
                 {
                     case R.id.googleMaps:
-                        startActivity(new Intent(getApplicationContext(), map.class));
+                        Intent intent1 = new Intent(getDataFromDb.this, map.class);
+                        intent1.putExtra("extraString",getUser);
+                        startActivity(intent1);
                         overridePendingTransition(0,0);
                         return true;
 
@@ -86,17 +78,23 @@ public class getDataFromDb extends AppCompatActivity {
                         return true;
 
                     case R.id.scanner:
-                        startActivity(new Intent(getApplicationContext(), img_processing.class));
+                        Intent intent2 = new Intent(getDataFromDb.this, img_processing.class);
+                        intent2.putExtra("extraString",getUser);
+                        startActivity(intent2);
                         overridePendingTransition(0,0);
                         return true;
 
                     case R.id.events:
-                        startActivity(new Intent(getApplicationContext(), events.class));
+                        Intent intent3 = new Intent(getDataFromDb.this, events.class);
+                        intent3.putExtra("extraString",getUser);
+                        startActivity(intent3);
                         overridePendingTransition(0,0);
                         return true;
 
                     case R.id.user:
-                        startActivity(new Intent(getApplicationContext(), user.class));
+                        Intent intent4 = new Intent(getDataFromDb.this, user.class);
+                        intent4.putExtra("extraString",getUser);
+                        startActivity(intent4);
                         overridePendingTransition(0,0);
                         return true;
                 }

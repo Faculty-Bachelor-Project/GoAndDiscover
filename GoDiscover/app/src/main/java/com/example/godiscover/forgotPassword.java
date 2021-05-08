@@ -28,6 +28,7 @@ public class forgotPassword extends AppCompatActivity {
     EditText emailAddress;
     ProgressBar progressBar;
     Button resetPasswordBtn, registerButton;
+    private static String URL = "http://192.168.0.178/gndApp/forgotPassword.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,7 @@ public class forgotPassword extends AppCompatActivity {
                             String[] data = new String[1];
                             data[0] = Email;
 
-                            PutData putData = new PutData("http://192.168.0.178/gndApp/forgotPassword.php", "POST", field, data);
+                            PutData putData = new PutData(URL, "POST", field, data);
 
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {

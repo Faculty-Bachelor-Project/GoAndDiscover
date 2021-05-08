@@ -29,8 +29,8 @@ public class img_processing extends AppCompatActivity implements CameraBridgeVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_img_processing);
-        Intent intent = getIntent();
-        String getUser = intent.getStringExtra("extra");
+        Intent getFromLogin = getIntent();
+        String getUser = getFromLogin.getStringExtra("extraString");
         cameraBridgeViewBase = (JavaCameraView)findViewById(R.id.camera);
         cameraBridgeViewBase.setVisibility(SurfaceView.VISIBLE);
         cameraBridgeViewBase.setCvCameraViewListener(this);
@@ -56,12 +56,16 @@ public class img_processing extends AppCompatActivity implements CameraBridgeVie
                 switch (item.getItemId())
                 {
                     case R.id.googleMaps:
-                        startActivity(new Intent(getApplicationContext(),map.class));
+                        Intent intent1 = new Intent(img_processing.this, map.class);
+                        intent1.putExtra("extraString",getUser);
+                        startActivity(intent1);
                         overridePendingTransition(0,0);
                         return true;
 
                     case R.id.db_data:
-                        startActivity(new Intent(getApplicationContext(), getDataFromDb.class));
+                        Intent intent2 = new Intent(img_processing.this, getDataFromDb.class);
+                        intent2.putExtra("extraString",getUser);
+                        startActivity(intent2);
                         overridePendingTransition(0,0);
                         return true;
 
@@ -69,14 +73,16 @@ public class img_processing extends AppCompatActivity implements CameraBridgeVie
                         return true;
 
                     case R.id.events:
-                        startActivity(new Intent(getApplicationContext(),events.class));
+                        Intent intent3 = new Intent(img_processing.this, events.class);
+                        intent3.putExtra("extraString",getUser);
+                        startActivity(intent3);
                         overridePendingTransition(0,0);
                         return true;
 
                     case R.id.user:
-                        Intent intent1 = new Intent(img_processing.this, user_menu.class);
-                        intent1.putExtra("extraString",getUser);
-                        startActivity(intent1);
+                        Intent intent4 = new Intent(img_processing.this, user.class);
+                        intent4.putExtra("extraString",getUser);
+                        startActivity(intent4);
                         overridePendingTransition(0,0);
                         return true;
                 }

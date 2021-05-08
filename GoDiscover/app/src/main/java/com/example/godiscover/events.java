@@ -35,6 +35,8 @@ public class events extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
+        Intent intent = getIntent();
+        String getUser = intent.getStringExtra("extraString");
 
         progressBar = findViewById(R.id.progressBar);
         recyclerView = findViewById(R.id.recyclerView);
@@ -54,17 +56,23 @@ public class events extends AppCompatActivity {
                 switch (item.getItemId())
                 {
                     case R.id.googleMaps:
-                        startActivity(new Intent(getApplicationContext(),map.class));
+                        Intent intent1 = new Intent(events.this, map.class);
+                        intent1.putExtra("extraString",getUser);
+                        startActivity(intent1);
                         overridePendingTransition(0,0);
                         return true;
 
                     case R.id.db_data:
-                        startActivity(new Intent(getApplicationContext(), getDataFromDb.class));
+                        Intent intent2 = new Intent(events.this, getDataFromDb.class);
+                        intent2.putExtra("extraString",getUser);
+                        startActivity(intent2);
                         overridePendingTransition(0,0);
                         return true;
 
                     case R.id.scanner:
-                        startActivity(new Intent(getApplicationContext(),img_processing.class));
+                        Intent intent3 = new Intent(events.this, img_processing.class);
+                        intent3.putExtra("extraString",getUser);
+                        startActivity(intent3);
                         overridePendingTransition(0,0);
                         return true;
 
@@ -72,7 +80,9 @@ public class events extends AppCompatActivity {
                         return true;
 
                     case R.id.user:
-                        startActivity(new Intent(getApplicationContext(),user.class));
+                        Intent intent4 = new Intent(events.this, user.class);
+                        intent4.putExtra("extraString",getUser);
+                        startActivity(intent4);
                         overridePendingTransition(0,0);
                         return true;
                 }
