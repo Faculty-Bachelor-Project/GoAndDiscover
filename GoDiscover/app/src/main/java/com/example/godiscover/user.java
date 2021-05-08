@@ -45,6 +45,8 @@ import org.json.JSONException;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class user extends AppCompatActivity {
 
     private static String URL = "http://192.168.0.108/gndApp/getUser.php";
@@ -53,7 +55,7 @@ public class user extends AppCompatActivity {
     TextView userText;
     TextView emailText;
     Button button;
-    ImageView avatar;
+    CircleImageView avatar;
     String getUser = "";
 
     @Override
@@ -62,7 +64,7 @@ public class user extends AppCompatActivity {
         setContentView(R.layout.activity_user);
 
         button = (Button)findViewById(R.id.chgImg);
-        avatar = (ImageView)findViewById(R.id.userImg);
+        avatar = (CircleImageView) findViewById(R.id.userImg);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String images = preferences.getString("image", null);
