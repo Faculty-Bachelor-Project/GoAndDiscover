@@ -78,13 +78,13 @@ class database
         } else return false;
     }
 	
-	function resetPassword($email, $token)
+	function resetPassword($email, $otp)
     {
 		$conn_string = "host=localhost port=5432 dbname=postgres user=postgres password=licenta1234";
 		$conn = pg_connect($conn_string);
 		
 		$this->sql =
-            "INSERT INTO password_reset(email,token) VALUES('" . $email . "','" . $token . "')";
+            "INSERT INTO password_reset(email,otp_code) VALUES('" . $email . "','" . $otp . "')";
 		
 		if (pg_query($conn, $this->sql)) 
 		{
@@ -92,39 +92,82 @@ class database
         } else return false;
     }
 	
-	function tokenVerify($email,$newPassword)
+	function expire_code_by_time($emailAddress)
+	{
+		$conn_string = "host=localhost port=5432 dbname=postgres user=postgres password=licenta1234";
+		$conn = pg_connect($conn_string);
+		
+		$this->sql =
+			"DELETE FROM password_reset WHERE expire_date < now() - interval '2 minutes' AND email ='" . $emailAddress . "'";
+		
+		pg_query($conn, $this->sql);	
+	}
+	
+	function updatePassword($email, $newPassword)
     {
 		$conn_string = "host=localhost port=5432 dbname=postgres user=postgres password=licenta1234";
 		$conn = pg_connect($conn_string);
-		$expireTime = date("Y-m-d H:i:s",strtotime(date("Y-m-d H:i:s")." + 5 minutes"));
+		
+		$newPassword = pg_escape_string($conn, stripslashes(htmlspecialchars($newPassword)));
+		
+        $newPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 		
 		$this->sql =
-            "SELECT token,timezone FROM reset_password WHERE email='" . $email . "'";
-        
-
+            "UPDATE users SET password = '" . $newPassword . "'WHERE email = '" . $email . "'";
+		
 		if (pg_query($conn, $this->sql)) 
 		{
-			while ($row = mysql_fetch_array($result)) 
-			{
-				$token = $row['token'];
-				$time = $row['expire_date'];
-			}
-			
-			if($token!="" && $time > $expireTime)
-			{
-				echo '<script>alert("Token has expired. Do another password request from App.")</script>';
-				die();
-			}else
-			{
-				$this->sql =
-					"UPDATE reset_password SET password='" . $newPassword . "' WHERE email='" . $email . "'";
-				if (pg_query($conn, $this->sql))
-				{
-					
-				}
-			}
-        }
+            return true;
+        } else return false;
     }
+	
+	function OTPCodeVerify($emailAddress)
+	{
+		$conn_string = "host=localhost port=5432 dbname=postgres user=postgres password=licenta1234";
+		$conn = pg_connect($conn_string);
+		
+		$this->sql =
+            "SELECT otp_code FROM password_reset WHERE email='" . $emailAddress . "'";
+			
+		$result = pg_query($conn, $this->sql);
+        $row = pg_fetch_assoc($result);	
+		
+		if (pg_num_rows($result) != 0) 
+		{
+            return $row['otp_code'];
+        } else return;
+	}
+	
+	function getEmailAddress($otp_code)
+	{
+		$conn_string = "host=localhost port=5432 dbname=postgres user=postgres password=licenta1234";
+		$conn = pg_connect($conn_string);
+		
+		$this->sql =
+            "SELECT email FROM password_reset WHERE otp_code='" . $otp_code . "'";
+			
+		$result = pg_query($conn, $this->sql);
+        $row = pg_fetch_assoc($result);	
+		
+		if (pg_num_rows($result) != 0) 
+		{
+            return $row['email'];
+        } else return;
+	}
+	
+	function deleteOTPCode($emailAddress)
+	{
+		$conn_string = "host=localhost port=5432 dbname=postgres user=postgres password=licenta1234";
+		$conn = pg_connect($conn_string);
+		
+		$this->sql =
+            "DELETE FROM password_reset WHERE email='" . $emailAddress . "'";
+			
+		if (pg_query($conn, $this->sql)) 
+		{
+            return true;
+        } else return false;
+	}
 	
 	function isDerivable($emailAddress)
 	{
@@ -149,8 +192,6 @@ class database
 		return true;
 		} else return false;
 	}
-	
-	
 }
 
 ?>
