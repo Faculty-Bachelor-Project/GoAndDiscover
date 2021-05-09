@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:title="settings"
-        android:id="@+id/settings_btn"
-        android:icon="@drawable/setting_btn" />
+        android:title="Change Password"
+        android:id="@+id/chgpass_btn" />
 
     <item
-        android:title="logout"
-        android:id="@+id/logout_btn"
-        android:icon="@drawable/logout" />
+        android:title="Reset Progress"
+        android:id="@+id/rstprog_btn" />
+
+    <item
+        android:title="Support"
+        android:id="@+id/support_btn" />
+
+    <item
+        android:title="Log out"
+        android:id="@+id/logout_btn" />
 </menu>

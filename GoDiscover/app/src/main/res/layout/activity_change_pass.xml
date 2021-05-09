@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".changePass">
+
+    <EditText
+        android:id="@+id/oldpass"
+        android:layout_width="245dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter old password"
+        android:inputType="textPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="240dp"/>
+
+    <EditText
+        android:id="@+id/newpass"
+        android:layout_width="245dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter new password"
+        android:inputType="textPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/oldpass"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/confpass"
+        android:layout_width="245dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Confirm password"
+        android:inputType="textPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/newpass"
+        android:layout_marginTop="20dp"/>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="404dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confpass" />
+
+    <Button
+        android:id="@+id/changeButton"
+        android:layout_width="245dp"
+        android:layout_height="57dp"
+        android:background="@drawable/button_design"
+        android:text="Change Password"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/confpass"
+        android:layout_marginTop="20dp"/>
+
+</RelativeLayout>
