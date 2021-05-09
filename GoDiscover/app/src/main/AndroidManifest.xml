@@ -12,7 +12,8 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL"
+    <uses-permission
+        android:name="android.permission.MEDIA_CONTENT_CONTROL"
         tools:ignore="ProtectedPermissions" />
 
     <application
@@ -23,7 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GoDiscover"
         android:usesCleartextTraffic="true">
-        <activity android:name=".user"></activity>
+        <activity android:name=".support"></activity>
+        <activity android:name=".changePass" />
+        <activity android:name=".user" />
         <activity android:name=".events" />
 
         <meta-data

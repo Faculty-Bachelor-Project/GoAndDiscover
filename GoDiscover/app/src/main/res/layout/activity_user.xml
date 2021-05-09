@@ -6,27 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".user">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/background">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background"/>
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+    </androidx.cardview.widget.CardView>
 
     <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/userImg"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
         android:src="@drawable/avatar"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/toolbar" />
+        android:layout_marginTop="180dp"
+        app:border_width="1dp"
+        app:border_color="#f20c2f"
+        android:outlineAmbientShadowColor="@color/black"
+        android:elevation="2dp"/>
+
 
     <Button
         android:id="@+id/chgImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Change Image"
-        android:layout_below="@+id/userImg"
+        android:textColor="@color/white"
+        android:layout_below="@+id/header"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@android:color/holo_orange_dark"/>
 
     <TextView
         android:id="@+id/userT"
@@ -41,18 +62,56 @@
         android:textColor="@color/black"
         android:textSize="25dp" />
 
-    <TextView
-        android:id="@+id/emailT"
-        android:layout_width="379dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/userT"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/email"
+        android:layout_width="350dp"
+        android:layout_height="70dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-11dp"
-        android:layout_marginBottom="30dp"
-        android:gravity="center_horizontal"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="25dp" />
+        android:layout_below="@+id/userT">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_email"
+                android:layout_marginLeft="20dp"/>
+
+            <TextView
+                android:id="@+id/emailText"
+                android:layout_width="250dp"
+                android:layout_height="20dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_horizontal"
+                android:textAlignment="viewStart"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:hint="E-mail"
+                tools:ignore="RtlCompat"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/emailT"
+                android:layout_width="250dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center_horizontal"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:layout_below="@id/emailText"
+                android:textSize="14dp"
+                android:layout_marginTop="10dp"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"

@@ -37,7 +37,7 @@ import java.util.Map;
 
 public class getDataFromDb extends AppCompatActivity {
 
-    private static String URL = "http://192.168.0.178/gndApp/index.php";
+    private static String URL = "http://192.168.0.108/gndApp/index.php";
     TextView title, describeLocation;
     ImageView headerImage;
     RecyclerView recyclerView;
