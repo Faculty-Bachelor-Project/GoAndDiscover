@@ -3,15 +3,18 @@
 require 'PHPMailer/PHPMailerAutoload.php';
 require "database.php";
 
-
 	$db = new database();
 	$emailAddress = $_POST['email'];
-	$token = bin2hex(random_bytes(16));
+	
+	//$token = bin2hex(random_bytes(16));
+	$otp = mt_rand(10000, 99999);
 
-	if (isset($emailAddress)) 
+	if (isset($emailAddress))
 	{			
-		if($db->resetPassword($emailAddress,$token))
+		if($db->resetPassword($emailAddress,$otp))
 		{
+			$db->expire_code_by_time($emailAddress);
+			
 			$mail = new PHPMailer;
 			$mail->Host = 'smtp.gmail.com';
 			$mail->Port=587;
@@ -29,15 +32,14 @@ require "database.php";
 			$mail->isHTML(true);
 			$mail->Subject='Reset Password';
 
-			$mail->Body = "We've received a request to reset the password for this email address.\r\nTo change your password click on the link below: ".
-							<<<EOF
-							<html>
-							<body>
-							<a href="http://localhost/gndapp/resetPassword.php?token=$token">http://localhost/gndapp/resetPassword.php?token=$token</a>
-							</body>
-							</html>
-							EOF .
-						"Please do not reply to this email. If you have any questions, please contact us at gndappcontact@gmail.com";
+			$mail->Body = 	"We've received a request to reset the password for 
+							this email address.\r\nThe requested code is: "
+							. $otp .
+							"\r\nPlease do not reply to this email. If you have any questions, 
+							please contact us at gndappcontact@gmail.com";
+			
+
+
 
 			if(!$mail->send())
 			{
@@ -49,4 +51,5 @@ require "database.php";
 			}
 		}
 	}
+
 ?>

@@ -37,7 +37,7 @@ PRIMARY KEY(id)
 	$sql_create = "CREATE TABLE password_reset (
         ID INT GENERATED ALWAYS AS IDENTITY,
         email VARCHAR(255),
-        token VARCHAR(255),
+        otp_code VARCHAR(5),
 		expire_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 		PRIMARY KEY(ID)
     )
