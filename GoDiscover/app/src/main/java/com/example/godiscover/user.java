@@ -67,10 +67,10 @@ public class user extends AppCompatActivity {
         avatar = (CircleImageView) findViewById(R.id.userImg);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String images = preferences.getString("image", null);
+        String imagess = preferences.getString("image", null);
 
         if (images != null) {
-            avatar.setImageURI(Uri.parse(images));
+            avatar.setImageURI(Uri.parse(imagess));
         } else {
             avatar.setImageResource(R.drawable.avatar);
         }

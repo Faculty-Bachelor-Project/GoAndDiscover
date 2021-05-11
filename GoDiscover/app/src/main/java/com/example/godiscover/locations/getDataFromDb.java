@@ -43,7 +43,7 @@ public class getDataFromDb extends AppCompatActivity {
     RecyclerView recyclerView;
     List<DatabaseParseItem> databaseParseItemsList;
     DatabaseParseAdapter getDataAdapter;
-    int id = 1;
+    Object id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,10 @@ public class getDataFromDb extends AppCompatActivity {
         String getUser = intent.getStringExtra("extraString");
 
         recyclerView = (RecyclerView) findViewById(R.id.dbDataList);
+
+        Intent ID = getIntent();
+        Bundle bundle = getIntent().getExtras();
+        id = ID.getFloatExtra("id", 0);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -143,7 +147,7 @@ public class getDataFromDb extends AppCompatActivity {
             protected Map<String,String> getParams() throws AuthFailureError
             {
                 Map<String,String> params = new HashMap<String,String>();
-                params.put("id",String.valueOf(id));
+                params.put("id", String.valueOf(id));
                 return params;
             }
         };
