@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -17,6 +18,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -42,6 +47,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,7 +55,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class user extends AppCompatActivity {
 
-    private static String URL = "http://192.168.0.108/gndApp/getUser.php";
+    private static String URL = "http://192.168.0.178/gndApp/getUser.php";
     private static final int PICK_IMAGE_REQUEST = 0;
     private Uri images;
     TextView userText;
@@ -57,20 +63,32 @@ public class user extends AppCompatActivity {
     Button button;
     CircleImageView avatar;
     String getUser = "";
+    private TextView steps_count, calories_count, distance;
+    private double MagnitudePrevious = 0;
+    private Integer stepCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
+        Intent intent = getIntent();
+        getUser = intent.getStringExtra("extraString");
+
         button = (Button)findViewById(R.id.chgImg);
         avatar = (CircleImageView) findViewById(R.id.userImg);
 
+        steps_count = (TextView) findViewById(R.id.counter);
+        calories_count = (TextView) findViewById(R.id.calories);
+        distance = (TextView) findViewById(R.id.distance);
+        SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String imagess = preferences.getString("image", null);
+        String images = preferences.getString("image", null);
 
         if (images != null) {
-            avatar.setImageURI(Uri.parse(imagess));
+            avatar.setImageURI(Uri.parse(images));
         } else {
             avatar.setImageResource(R.drawable.avatar);
         }
@@ -79,8 +97,6 @@ public class user extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        Intent intent = getIntent();
-        getUser = intent.getStringExtra("extraString");
         userText = (TextView) findViewById(R.id.userT);
         emailText = (TextView) findViewById(R.id.emailT);
 
@@ -134,6 +150,39 @@ public class user extends AppCompatActivity {
                 imageSelect();
             }
         });
+
+        SensorEventListener stepDetector = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                if(event != null)
+                {
+                    float x_acceleration = event.values[0];
+                    float y_acceleration = event.values[1];
+                    float z_acceleration = event.values[2];
+
+                    double Magnitude = Math.sqrt(x_acceleration * x_acceleration + y_acceleration * y_acceleration + z_acceleration * z_acceleration);
+                    double MagnitudeDelta = Magnitude - MagnitudePrevious;
+                    MagnitudePrevious = Magnitude;
+
+                    if(MagnitudeDelta > 6)
+                    {
+                        stepCount++;
+                    }
+                    steps_count.setText(stepCount.toString());
+                    calories_count.setText(getCalories(stepCount));
+                    distance.setText(getDistance(stepCount));
+
+
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
+        };
+
+        sensorManager.registerListener(stepDetector,sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     public void imageSelect() {
@@ -233,6 +282,42 @@ public class user extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    protected String getCalories(int steps)
+    {
+        String calories = String.valueOf((int) (steps * 0.033));
+        return calories;
+    }
+
+    protected String getDistance(int steps)
+    {
+        String distance = String.valueOf((int) (steps * 0.3048));
+        return distance;
+    }
+
+    protected void onPause()
+    {
+        super.onPause();
+
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear().putInt("stepCount", stepCount).apply();
+    }
+
+    protected void onStop() {
+        super.onStop();
+
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear().putInt("stepCount", stepCount).apply();
+    }
+
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        stepCount = sharedPreferences.getInt("stepCount", 0);
     }
 
 
