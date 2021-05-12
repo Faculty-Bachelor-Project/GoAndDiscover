@@ -45,7 +45,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/user1"
         android:layout_width="350dp"
-        android:layout_height="140dp"
+        android:layout_height="150dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/header">
 
@@ -134,10 +134,10 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/user2"
         android:layout_width="350dp"
-        android:layout_height="140dp"
+        android:layout_height="150dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/user1"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="80dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -154,7 +154,7 @@
                 android:id="@+id/name1"
                 android:layout_width="250dp"
                 android:layout_height="20dp"
-                android:text="Nume: Sarca Florin Sabin "
+                android:text="Nume: Sârcă Florin Sabin "
                 android:layout_alignParentRight="true"
                 android:gravity="center_horizontal"
                 android:textAlignment="viewStart"
